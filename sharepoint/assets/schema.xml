@@ -18,6 +18,8 @@
          <FieldRef Name="ORG_Picture"></FieldRef>
          <FieldRef Name="ORG_MyReportees"></FieldRef>
          <FieldRef Name="ORG_MyReportees_ID"></FieldRef>
+         <FieldRef Name="ORG_MyOfficeAssistant"></FieldRef>
+         <FieldRef Name="ORG_MyOfficeAssistant_x003a_ID"></FieldRef>
        </ViewFields>
        <Query>
          <OrderBy>

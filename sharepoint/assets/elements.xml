@@ -65,7 +65,36 @@
                 ID="{6A9D77DD-3736-42FA-9D75-BA0B3DFAE74E}"
                 StaticName="ORG_MyReportees_ID"
                 Name="ORG_MyReportees_ID"
-                Group="ORG Columns" />     
+                Group="ORG Columns" />
+
+        <Field Type="Lookup"
+                DisplayName="My Office Assistant"
+                Required="FALSE"
+                List="Lists/Orgconfig"
+                EnforceUniqueValues="FALSE"
+                ShowField="Title"
+                Mult="FALSE"
+                Sortable="FALSE"
+                UnlimitedLengthInDocumentLibrary="FALSE"
+                RelationshipDeleteBehavior="None"
+                ID="{0A66FDFD-0936-481C-8A63-00678A7531F1}"
+                StaticName="ORG_MyOfficeAssistant"
+                Name="ORG_MyOfficeAssistant"
+                Group="ORG Columns" />
+
+        <Field Type="Lookup"
+                DisplayName="ORG_MyOfficeAssistant:ID"
+                ShowField="ID"
+                FieldRef="A66FDFD-0936-481C-8A63-00678A7531F1"
+                List="Lists/Orgconfig"
+                ReadOnly="TRUE"
+                Mult="FALSE"
+                Sortable="FALSE"
+                UnlimitedLengthInDocumentLibrary="FALSE"
+                ID="{6A9D77DD-3736-42FA-9D75-BA0B3DFAE74E}"
+                StaticName="ORG_MyOfficeAssistant_x003a_ID"
+                Name="ORG_MyOfficeAssistant_x003a_ID"
+                Group="ORG Columns" />
 
         <ContentType ID="0x0100F4C266967DF54F5FAB9CDAA2A09D51C9" 
                 Name="ORG Org Chart User" 
