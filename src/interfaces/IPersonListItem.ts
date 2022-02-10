@@ -6,6 +6,7 @@ export interface IPersonListItem {
     ORG_Description?: string;
     ORG_Picture?: IPicture;
     ORG_MyReportees?: IReportee[];
+    ORG_MyOfficeAssistant?: any;
     email?: string;
 }
 

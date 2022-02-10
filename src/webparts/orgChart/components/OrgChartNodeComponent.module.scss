@@ -6,11 +6,11 @@
 
 .nodeBig {
   @extend .nodeBase;
-  width: 200px;
+  width: 260px;
   border: solid 1px;
   border-color: $ms-color-neutralLighterAlt;
   border-radius: 3px;
-  padding: 5px;
+  padding: 30px 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 15px 25px 0 rgba(0, 0, 0, 0.1);
 }
 

@@ -1,4 +1,4 @@
-import { Callout, DirectionalHint, getInitials, IPersona, Persona, PersonaSize } from 'office-ui-fabric-react';
+import { DirectionalHint, getInitials, IPersona, Persona, PersonaSize } from 'office-ui-fabric-react';
 import * as React from 'react';
 import { IPerson } from '../../../interfaces/IPerson';
 import DataService from '../../../services/dataservice';
@@ -17,6 +17,7 @@ export interface IOrgChartNodeComponentState {
   imageUrl: string;
   jobTitle: string;
   department: string;
+  officeAssis?: any;
 }
 
 export default class OrgChartNodeComponent extends React.Component<IOrgChartNodeComponentProps, IOrgChartNodeComponentState> {
@@ -38,6 +39,8 @@ export default class OrgChartNodeComponent extends React.Component<IOrgChartNode
       imageUrl: this.props.node.imageUrl || null,
       jobTitle: this.props.node.description || null,
       department: this.props.node.department || null,
+      
+      officeAssis: this.props.node.officeAssis ? this.props.node.officeAssis : null
     };
   }
 
@@ -48,7 +51,6 @@ export default class OrgChartNodeComponent extends React.Component<IOrgChartNode
           this.setState({ imageUrl: window.URL.createObjectURL(blob) });
         }
       );
-
       this.props.dataService.getUserInfoFromGraphApi(this.props.node.email).then(
         (userInfo: any) => {
           this.setState({ jobTitle: userInfo.jobTitle, department: userInfo.department });
@@ -79,9 +81,13 @@ export default class OrgChartNodeComponent extends React.Component<IOrgChartNode
           size={this.props.styleIsSmall ? PersonaSize.size72 : PersonaSize.size48}
           hidePersonaDetails={this.props.styleIsSmall}
           imageUrl={this.state.imageUrl}
-          secondaryText={this.state.department}
-        />
-        {(isCalloutVisible) ? (
+          secondaryText={this.state.department + ' - ' + this.state.jobTitle }
+        >
+          {this.state.officeAssis.name && 
+            <Persona size={PersonaSize.size24} text={this.state.officeAssis.name} showSecondaryText secondaryText={this.state.officeAssis.description}/>
+          }
+        </Persona>
+        {/* {(isCalloutVisible) ? (
           <Callout
             className='ms-CalloutExample-callout'
             target={this._menuButtonElement}
@@ -102,7 +108,7 @@ export default class OrgChartNodeComponent extends React.Component<IOrgChartNode
                 </div>
               </div>) : (null)}
           </Callout>
-        ) : (null)}
+        ) : (null)} */}
       </div>
     );
   }

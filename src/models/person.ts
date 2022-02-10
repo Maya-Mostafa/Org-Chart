@@ -10,6 +10,8 @@ export class Person implements IPerson {
     public description?: string;
     public imageUrl?: string;
     public email?: string;
+    public officeAssis?: IPerson = {id:'', name:'', description:'', department:'', email:'', imageUrl:''} ;
+
     constructor(listItem: IPersonListItem, allUsersData?: IPersonListItem[], dataService?: DataService, setStateFunc?: Function) {
         this.id = listItem.Id;
         this.name = listItem.Title;
@@ -17,8 +19,22 @@ export class Person implements IPerson {
         this.description = listItem.ORG_Description || null;
         this.imageUrl = listItem.ORG_Picture ? listItem.ORG_Picture.Url : null;
         this.email = listItem.email ? listItem.email : null;
-
+        
         if (allUsersData) {
+
+            if (listItem.ORG_MyOfficeAssistant){
+                for (let user of allUsersData){
+                    if (user.Id === listItem.ORG_MyOfficeAssistant.Id) {
+                        this.officeAssis.id = user.Id;
+                        this.officeAssis.name = user.Title;
+                        this.officeAssis.description = user.ORG_Description;
+                        this.officeAssis.department = user.ORG_Department;
+                        this.officeAssis.imageUrl = user.ORG_Picture ? user.ORG_Picture.Url : null;
+                        this.officeAssis.email = user.email ? user.email : null;
+                    }
+                }
+            }
+
             listItem.ORG_MyReportees.forEach((reportee: IReportee) => {
                 //u.Id != this.id filter wrongly configured user as reportee
                 let filterdUserData: IPersonListItem[];

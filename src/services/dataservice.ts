@@ -43,7 +43,7 @@ export default class DataService implements IDataService {
 
   public getUsersFromList(listid: string): Promise<IPersonListItem[]> {
     return this.context.spHttpClient.get(
-      `${this.context.pageContext.web.absoluteUrl}/_api/web/lists('${listid}')/items?$select=Id,Title,ORG_Department,ORG_Description,ORG_Picture,ORG_MyReportees,ORG_MyReportees/Id&$expand=ORG_MyReportees`,
+      `${this.context.pageContext.web.absoluteUrl}/_api/web/lists('${listid}')/items?$select=Id,Title,ORG_Department,ORG_Description,ORG_Picture,ORG_MyReportees,ORG_MyReportees/Id,ORG_MyOfficeAssistant,ORG_MyOfficeAssistant/Id&$expand=ORG_MyReportees,ORG_MyOfficeAssistant`,
       SPHttpClient.configurations.v1)
       .then((response: SPHttpClientResponse) => response.json())
       .then((jsonData: { value: IPersonListItem[] }) => {
@@ -117,9 +117,11 @@ export default class DataService implements IDataService {
     return spListAddResult.list.contentTypes.addAvailableContentType("0x0100F4C266967DF54F5FAB9CDAA2A09D51C9").then((addedCTResult: ContentTypeAddResult) => {
       return this.getItemCT(spListAddResult).then((contentype: SPContentType) => {
         return this.updateLookupField(spListAddResult.list, spListAddResult.data).then(() => {
-          return this.updateView(spListAddResult.list).then(() => {
-            return spListAddResult.list.contentTypes.getById(contentype.StringId).delete().then(() => {
-              return Promise.resolve();
+          return this.updateLookupField2(spListAddResult.list, spListAddResult.data).then(() => {
+            return this.updateView(spListAddResult.list).then(() => {
+              return spListAddResult.list.contentTypes.getById(contentype.StringId).delete().then(() => {
+                return Promise.resolve();
+              });
             });
           });
         });
@@ -134,7 +136,9 @@ export default class DataService implements IDataService {
       spList.views.getByTitle("All Items").fields.inBatch(batch).add("ORG_Description"),
       spList.views.getByTitle("All Items").fields.inBatch(batch).add("ORG_Picture"),
       spList.views.getByTitle("All Items").fields.inBatch(batch).add("ORG_MyReportees"),
-      spList.views.getByTitle("All Items").fields.inBatch(batch).add("ORG_MyReportees_ID");
+      spList.views.getByTitle("All Items").fields.inBatch(batch).add("ORG_MyReportees_ID"),
+      spList.views.getByTitle("All Items").fields.inBatch(batch).add("ORG_MyOfficeAssistant"),
+      spList.views.getByTitle("All Items").fields.inBatch(batch).add("ORG_MyOfficeAssistant_x003a_ID");
 
     return batch.execute().then(() => {
       return Promise.resolve();
@@ -157,6 +161,28 @@ export default class DataService implements IDataService {
               ID="{F84FC9D9-6307-44BA-84C5-C029C0D19BE8}"
               StaticName="ORG_MyReportees"
               Name="ORG_MyReportees"
+              Group="ORG Columns" />`
+    }).then(() => {
+      return Promise.resolve();
+    }).catch(ErrorHandler.handleError);
+  }
+
+  private updateLookupField2(spList: List, listData: SPListData): Promise<void> {
+    return spList.fields.getByInternalNameOrTitle("ORG_MyOfficeAssistant").update({
+      "SchemaXml":
+        `<Field Type="Lookup"
+              DisplayName="My Office Assistant"
+              Required="FALSE"
+              List="{${listData.Id}}"
+              EnforceUniqueValues="FALSE"
+              ShowField="Title"
+              Mult="TRUE"
+              Sortable="FALSE"
+              UnlimitedLengthInDocumentLibrary="FALSE"
+              RelationshipDeleteBehavior="None"
+              ID="{0A66FDFD-0936-481C-8A63-00678A7531F1}"
+              StaticName="ORG_MyOfficeAssistant"
+              Name="ORG_MyOfficeAssistant"
               Group="ORG Columns" />`
     }).then(() => {
       return Promise.resolve();

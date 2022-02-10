@@ -7,4 +7,5 @@ export interface IPerson {
     imageUrl?: string;
     children?: IPerson[];
     email?: string;
+    officeAssis?: IPerson;
 }
