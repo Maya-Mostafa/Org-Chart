@@ -14,6 +14,7 @@ import { IPersonListItem } from "../../interfaces/IPersonListItem";
 import DataService from '../../services/dataservice';
 import MockDataService from '../../services/mockdataservice';
 import OrgChart, { ErrorHandlerProps, IOrgChartProps } from './components/OrgChart';
+// import { Providers, SharePointProvider } from '@microsoft/mgt-spfx';
 
 export interface IOrgChartWebPartProps {
   selectedList: string;
@@ -34,6 +35,11 @@ export default class OrgChartWebPart extends BaseClientSideWebPart<IOrgChartWebP
   private _userDropDownOptions: IPropertyPaneDropdownOption[] = [];
 
   protected onInit(): Promise<void> {
+
+    // if (!Providers.globalProvider) {
+    //   Providers.globalProvider = new SharePointProvider(this.context);
+    // }
+
     pnp.setup({
       spfxContext: this.context
     });
