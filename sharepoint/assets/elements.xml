@@ -77,7 +77,7 @@
                 Sortable="FALSE"
                 UnlimitedLengthInDocumentLibrary="FALSE"
                 RelationshipDeleteBehavior="None"
-                ID="{0A66FDFD-0936-481C-8A63-00678A7531F1}"
+                ID="{EC9EDB66-8F11-4789-83E1-9F376A80A464}"
                 StaticName="ORG_MyOfficeAssistant"
                 Name="ORG_MyOfficeAssistant"
                 Group="ORG Columns" />
@@ -85,15 +85,15 @@
         <Field Type="Lookup"
                 DisplayName="ORG_MyOfficeAssistant:ID"
                 ShowField="ID"
-                FieldRef="A66FDFD-0936-481C-8A63-00678A7531F1"
+                FieldRef="EC9EDB66-8F11-4789-83E1-9F376A80A464"
                 List="Lists/Orgconfig"
                 ReadOnly="TRUE"
                 Mult="FALSE"
                 Sortable="FALSE"
                 UnlimitedLengthInDocumentLibrary="FALSE"
-                ID="{6A9D77DD-3736-42FA-9D75-BA0B3DFAE74E}"
-                StaticName="ORG_MyOfficeAssistant_x003a_ID"
-                Name="ORG_MyOfficeAssistant_x003a_ID"
+                ID="{CBB473A7-8949-4D9A-89F3-121B0E9BC3CD}"
+                StaticName="ORG_MyOfficeAssistant_ID"
+                Name="ORG_MyOfficeAssistant_ID"
                 Group="ORG Columns" />
 
         <ContentType ID="0x0100F4C266967DF54F5FAB9CDAA2A09D51C9" 
@@ -111,7 +111,7 @@
                         <FieldRef ID="{7537821E-1071-411D-B368-A05F8F748568}" />
                         <FieldRef ID="{2498EF03-A11D-41BC-B91C-FFF4F6EF9BCE}" />
                         <FieldRef ID="{F84FC9D9-6307-44BA-84C5-C029C0D19BE8}" />
-                        <FieldRef ID="{6A9D77DD-3736-42FA-9D75-BA0B3DFAE74E}" />
+                        <FieldRef ID="{EC9EDB66-8F11-4789-83E1-9F376A80A464}" />
                 </FieldRefs>
         </ContentType> 
 
